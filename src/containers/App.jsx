@@ -5,54 +5,49 @@ import {
     Categories,
     Carousel,
     CarouselItem,
+    Footer,
 } from '../components'
+import { useInitialVideos } from '../hooks'
+
 import '../assets/styles/containers/App.scss'
 
+const API = 'http://localhost:3000/initalState'
+
 export const App = () => {
+    const videos = useInitialVideos(API)
+
     return (
         <div>
             <Header/>
             <Search/>
-            <Categories>
-                <Carousel>
-                    <CarouselItem
-                        image='https://images.pexels.com/photos/1438072/pexels-photo-1438072.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-                        alt='People'
-                    />
-                    <CarouselItem
-                        image='https://images.pexels.com/photos/2752777/pexels-photo-2752777.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                        alt='Stranger Things'
-                    />
-                    <CarouselItem
-                        image='https://images.pexels.com/photos/2346001/pexels-photo-2346001.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                        alt='Chicago'
-                    />
-                    <CarouselItem
-                        image='https://images.pexels.com/photos/1463924/pexels-photo-1463924.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                        alt='Mermaid'
-                    />
-                    <CarouselItem
-                        image='https://images.pexels.com/photos/1853354/pexels-photo-1853354.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                        alt='Mountain'
-                    />
-                    <CarouselItem
-                        image='https://images.pexels.com/photos/2591761/pexels-photo-2591761.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                        alt='Poster'
-                    />
-                    <CarouselItem
-                        image='https://images.pexels.com/photos/2559745/pexels-photo-2559745.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                        alt='Poster'
-                    />
-                    <CarouselItem
-                        image='https://images.pexels.com/photos/937786/pexels-photo-937786.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                        alt='Poster'
-                    />
-                    <CarouselItem
-                        image='https://images.pexels.com/photos/276080/pexels-photo-276080.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-                        alt='Poster'
-                    />
-                </Carousel>
-            </Categories>
+            {videos && Object.keys(videos).map(categorie => {
+                if (videos[categorie].length) {
+                    return (
+                        <Categories
+                            title={categorie}
+                            key={categorie}
+                        >
+                            <Carousel>
+                                {videos[categorie].map(video => {
+                                    return (
+                                        <CarouselItem
+                                            image={video.cover}
+                                            alt={video.title}
+                                            key={video.id}
+                                            year={video.year}
+                                            title={video.title}
+                                            content={video.contentRating}
+                                            duration={video.duration}
+                                        />
+                                    )
+                                })}
+                            </Carousel>
+                        </Categories>
+                    )
+                }
+                return null
+            })}
+            <Footer/>
         </div>
     )
 }

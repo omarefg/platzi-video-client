@@ -1,6 +1,11 @@
+@import '../lib/Vars.scss';
+
 body {
     margin: 0;
-    background-color: #8f57fd;
-    font-family: 'Muli', sans-serif;
+    background-color: $pv-purple;
+    font-family: $pv-font;
     overflow-x: hidden;
+    @media screen and (max-width: $media-s) {
+        background: linear-gradient($pv-green, $pv-purple);
+    }
 }

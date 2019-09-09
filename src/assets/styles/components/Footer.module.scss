@@ -1,0 +1,22 @@
+@import '../lib/Vars.scss';
+
+.footer {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    a {
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        text-decoration: none;
+        padding-left: 30px;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    @media screen and (max-width: $media-s) {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+}
