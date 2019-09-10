@@ -1,26 +1,27 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import { connect } from 'react-redux'
 import {
-    Header,
     Search,
     Categories,
     Carousel,
     CarouselItem,
-    Footer,
 } from '../components'
-import { useInitialVideos } from '../hooks'
 
-import '../assets/styles/containers/App.scss'
+const mapStateToProps = state => {
+    return {
+        videos: {
+            'Mi Lista': state.mylist,
+            Tendencias: state.trends,
+            Originales: state.originals,
+        },
+    }
+}
 
-const API = 'http://localhost:3000/initalState'
-
-export const App = () => {
-    const videos = useInitialVideos(API)
-
+export const Home = connect(mapStateToProps, null)(({ videos }) => {
     return (
-        <div>
-            <Header/>
+        <Fragment>
             <Search/>
-            {videos && Object.keys(videos).map(categorie => {
+            {Object.keys(videos).map(categorie => {
                 if (videos[categorie].length) {
                     return (
                         <Categories
@@ -47,8 +48,6 @@ export const App = () => {
                 }
                 return null
             })}
-            <Footer/>
-        </div>
+        </Fragment>
     )
-}
-
+})

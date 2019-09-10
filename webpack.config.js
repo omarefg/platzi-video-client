@@ -10,6 +10,7 @@ module.exports = {
     },
     devServer: {
         port: 3600,
+        historyApiFallback: true,
     },
     resolve: {
         extensions: ['.js', '.jsx'],

@@ -2,10 +2,8 @@
 
 body {
     margin: 0;
-    background-color: $pv-purple;
+    background: linear-gradient($pv-green, $pv-purple);
     font-family: $pv-font;
     overflow-x: hidden;
-    @media screen and (max-width: $media-s) {
-        background: linear-gradient($pv-green, $pv-purple);
-    }
+    min-height: 100vh;
 }

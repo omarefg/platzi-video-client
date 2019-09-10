@@ -24,6 +24,7 @@
       "import"
     ],
     "rules": {
+      "react/jsx-fragments": 0,
       "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "never" }],
       "semi": [2, "never"],
       "arrow-parens": ["error", "as-needed"],
