@@ -1,34 +1,80 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import styles from '../assets/styles/components/Carousel.module.scss'
 import playIcon from '../assets/static/icons8-play-64.png'
 import addIcon from '../assets/static/icons8-plus-64.png'
+import trashIcon from '../assets/static/remove-icon_a56b8107-2c02-49ed-bead-308031b0dd76.webp'
+import { setFavorite, deleteFavorite } from '../actions'
 
-export const CarouselItem = ({ image, alt, title, year, content, duration }) => {
+const mapDispatchToProps = {
+    setFavorite,
+    deleteFavorite,
+}
+
+export const CarouselItem = connect(null, mapDispatchToProps)(props => {
+    const {
+        cover,
+        title,
+        year,
+        contentRating,
+        duration,
+        setFavorite,
+        id,
+        deleteFavorite,
+        showAdd,
+        showDelete,
+        showPlay,
+    } = props
+
+    const handleSetFavorite = () => setFavorite({
+        cover,
+        title,
+        year,
+        contentRating,
+        duration,
+        id,
+    })
+
+    const handleDeleteFavorite = () => deleteFavorite(id)
+
     return (
         <div className={styles['carousel-item']}>
             <img
                 className={styles['carousel-item__img']}
-                src={image}
-                alt={alt}
+                src={cover}
+                alt={title}
             />
             <div className={styles['carousel-item__details']}>
                 <div>
-                    <img src={playIcon} alt='Play'/>
-                    <img src={addIcon} alt='Add'/>
+                    {showPlay && <img src={playIcon} alt='Play'/>}
+                    {showAdd && (
+                        <img
+                            src={addIcon}
+                            alt='Add'
+                            onClick={handleSetFavorite}
+                        />
+                    )}
+                    {showDelete && (
+                        <img
+                            src={trashIcon}
+                            alt='Delete'
+                            onClick={handleDeleteFavorite}
+                        />
+                    )}
                 </div>
                 <p className={styles['carousel-item__details--title']}>{title}</p>
-                <p className={styles['carousel-item__details--subtitle']}>{`${year} ${content} ${duration} minutos`}</p>
+                <p className={styles['carousel-item__details--subtitle']}>{`${year} ${contentRating} ${duration} minutos`}</p>
             </div>
         </div>
     )
-}
+})
 
 CarouselItem.propTypes = {
-    image: PropTypes.string,
+    cover: PropTypes.string,
     alt: PropTypes.string,
     title: PropTypes.string,
     year: PropTypes.number,
-    content: PropTypes.string,
+    contentRating: PropTypes.string,
     duration: PropTypes.number,
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from '../assets/styles/containers/Login.module.scss'
@@ -7,25 +7,50 @@ import twitter from '../assets/static/icons8-twitter-52.png'
 import google from '../assets/static/icons8-google-50.png'
 
 export const Login = () => {
+    const [form, setForm] = useState({
+        email: '',
+        password: '',
+        rememberMe: false,
+    })
+
+    const setFormHandler = event => setForm({
+        ...form,
+        [event.target.name]: event.target.value,
+    })
+
+    const submitHandler = event => {
+        event.preventDefault()
+        console.log(form)
+    }
+
     return (
         <section className={styles.login}>
             <div className={styles.login__container}>
                 <h2>Inicia Sesión</h2>
-                <form className={styles['login__container--form']}>
+                <form
+                    className={styles['login__container--form']}
+                    onSubmit={submitHandler}
+                >
                     <input
                         className={styles.input}
                         type='text'
                         placeholder='Correo'
                         aria-label='Correo'
+                        name='email'
+                        onChange={setFormHandler}
+                        value={form.email}
                     />
                     <input
                         className={styles.input}
                         type='password'
                         placeholder='Contraseña'
                         aria-label='Contraseña'
+                        name='password'
+                        onChange={setFormHandler}
+                        value={form.password}
                     />
                     <button
-                        type='button'
+                        type='submit'
                         className={styles.button}
                     >
                             Inicia sesión
@@ -35,9 +60,11 @@ export const Login = () => {
                             <input
                                 id='cbox1'
                                 type='checkbox'
-                                value='checkbox'
+                                name='rememberMe'
+                                onChange={setFormHandler}
+                                value={form.rememberMe}
                             />
-                        Recuérdame
+                            Recuérdame
                         </label>
                         <a href='/'>Olvidé mi contraseña</a>
                     </div>

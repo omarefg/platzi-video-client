@@ -32,13 +32,16 @@ export const Home = connect(mapStateToProps, null)(({ videos }) => {
                                 {videos[categorie].map(video => {
                                     return (
                                         <CarouselItem
-                                            image={video.cover}
-                                            alt={video.title}
+                                            id={video.id}
+                                            cover={video.cover}
                                             key={video.id}
                                             year={video.year}
                                             title={video.title}
-                                            content={video.contentRating}
+                                            contentRating={video.contentRating}
                                             duration={video.duration}
+                                            showPlay={true}
+                                            showAdd={categorie !== 'Mi Lista'}
+                                            showDelete={categorie === 'Mi Lista'}
                                         />
                                     )
                                 })}
