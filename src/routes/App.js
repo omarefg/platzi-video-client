@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { Home, Login, Register, NotFound } from '../containers'
+import { Home, Login, Register, NotFound, Player } from '../containers'
 import { Layout } from '../components'
 
 export const App = () => {
@@ -22,6 +22,11 @@ export const App = () => {
                         exact
                         path='/register'
                         component={Register}
+                    />
+                    <Route
+                        exact
+                        path='/player/:id'
+                        component={Player}
                     />
                     <Route
                         component={NotFound}

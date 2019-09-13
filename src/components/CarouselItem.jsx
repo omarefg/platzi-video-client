@@ -1,11 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+
+import { setFavorite, deleteFavorite } from '../actions'
+
 import styles from '../assets/styles/components/Carousel.module.scss'
 import playIcon from '../assets/static/icons8-play-64.png'
 import addIcon from '../assets/static/icons8-plus-64.png'
 import trashIcon from '../assets/static/remove-icon_a56b8107-2c02-49ed-bead-308031b0dd76.webp'
-import { setFavorite, deleteFavorite } from '../actions'
 
 const mapDispatchToProps = {
     setFavorite,
@@ -47,7 +50,14 @@ export const CarouselItem = connect(null, mapDispatchToProps)(props => {
             />
             <div className={styles['carousel-item__details']}>
                 <div>
-                    {showPlay && <img src={playIcon} alt='Play'/>}
+                    {showPlay && (
+                        <Link to={`/player/${id}`}>
+                            <img
+                                src={playIcon}
+                                alt='Play'
+                            />
+                        </Link>
+                    )}
                     {showAdd && (
                         <img
                             src={addIcon}

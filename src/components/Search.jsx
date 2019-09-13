@@ -1,7 +1,17 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { filterVideos } from '../actions'
+
 import styles from '../assets/styles/components/Search.module.scss'
 
-export const Search = props => {
+const mapDispatchToProps = {
+    filterVideos,
+}
+
+export const Search = connect(null, mapDispatchToProps)(({ filterVideos }) => {
+
+    const filterVideosHandler = event => filterVideos(event.target.value)
+
     return (
         <section className={styles.main}>
             <h2 className={styles.main__title}>
@@ -11,7 +21,8 @@ export const Search = props => {
                 className={styles.input}
                 type='text'
                 placeholder='Buscar...'
+                onChange={filterVideosHandler}
             />
         </section>
     )
-}
+})
