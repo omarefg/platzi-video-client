@@ -7,7 +7,7 @@ import {
     GET_VIDEO_SOURCE,
     FILTER_VIDEOS,
 } from '../actions/types'
-import { initialState as initialStateVideos } from '../../db/videos.json'
+import { initialState as initialStateVideos } from '../../../db/videos.json'
 
 const reducer = (state, action) => {
     switch (action.type) {
