@@ -1,8 +1,14 @@
-import { createStore } from 'redux'
-import { initialState as initialStateVideos } from '../../db/videos.json'
+import { createStore, compose } from 'redux'
 import reducer from './reducers'
 
-const initialState = { ...initialStateVideos }
-const enhancer = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const preloadedState = window.__PRELOADED_STATE__
 
-export const store = createStore(reducer, initialState, enhancer)
+let enhancer
+
+if (process.env.NODE_ENV === 'production') {
+    enhancer = compose
+} else {
+    enhancer = window.__REDUX_DEVTOOLS_EXTENSION__ || compose
+}
+
+export const store = createStore(reducer, preloadedState, enhancer())

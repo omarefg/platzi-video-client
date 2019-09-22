@@ -1,16 +1,20 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import webpack from 'webpack'
+import helmet from 'helmet'
+import { main } from './routes'
 
 dotenv.config()
 
-const { ENV } = process.env
+const { NODE_ENV } = process.env
 const PORT = process.env.PORT || 3025
 
 const app = express()
 
-if (ENV === 'development') {
-    console.log('Loading dev config')
+app.use(express.static(`${__dirname}/public`))
+
+if (NODE_ENV === 'development') {
+    console.log('Loading development config')
     const webpackConfig = require('../../webpack.config')
     const webpackDevMiddleware = require('webpack-dev-middleware')
     const webpackHotMiddleware = require('webpack-hot-middleware')
@@ -26,11 +30,14 @@ if (ENV === 'development') {
 
     app.use(webpackDevMiddleware(compiler, serverConfig))
     app.use(webpackHotMiddleware(compiler))
+} else {
+    console.log('Loading production config')
+    app.use(helmet())
+    app.use(helmet.permittedCrossDomainPolicies())
+    app.disable('x-powered-by')
 }
 
-app.get('*', (req, res) => {
-    res.send({ holamundo: true })
-})
+app.get('*', main)
 
 app.listen(PORT, error => {
     if (error) {
