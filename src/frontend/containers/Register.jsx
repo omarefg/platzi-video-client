@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { registerRequest } from '../actions'
+import { registerUser } from '../actions'
 
 import styles from '../assets/styles/containers/Login.module.scss'
 
 const mapDispatchToProps = {
-    registerRequest,
+    registerUser,
 }
 
-export const Register = connect(null, mapDispatchToProps)(({ history, registerRequest }) => {
+export const Register = connect(null, mapDispatchToProps)(({ history, registerUser }) => {
     const [form, setForm] = useState({
         name: '',
         email: '',
@@ -23,8 +23,8 @@ export const Register = connect(null, mapDispatchToProps)(({ history, registerRe
 
     const submitHandler = event => {
         event.preventDefault()
-        registerRequest(form)
-        history.push('/')
+        console.log('entre acá')
+        registerUser(form, '/login')
     }
 
     return (
@@ -42,6 +42,7 @@ export const Register = connect(null, mapDispatchToProps)(({ history, registerRe
                         aria-label='Nombre'
                         name='name'
                         onChange={setFormHandler}
+                        required
                     />
                     <input
                         className={styles.input}
@@ -50,6 +51,7 @@ export const Register = connect(null, mapDispatchToProps)(({ history, registerRe
                         aria-label='Correo'
                         name='email'
                         onChange={setFormHandler}
+                        required
                     />
                     <input
                         className={styles.input}
@@ -58,6 +60,7 @@ export const Register = connect(null, mapDispatchToProps)(({ history, registerRe
                         aria-label='Contraseña'
                         name='password'
                         onChange={setFormHandler}
+                        required
                     />
                     <button
                         className={styles.button}

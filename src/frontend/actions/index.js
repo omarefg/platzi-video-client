@@ -8,6 +8,7 @@ import {
     REGISTER_REQUEST,
     GET_VIDEO_SOURCE,
     FILTER_VIDEOS,
+    SET_ERROR,
 } from './types'
 
 export const setFavorite = payload => ({
@@ -45,6 +46,15 @@ export const filterVideos = payload => ({
     payload,
 })
 
-export const registerUser = payload => dispatch => {
-    axios.post('')
+export const setError = payload => ({
+    type: SET_ERROR,
+})
+
+export const registerUser = (payload, redirectUrl) => dispatch => {
+    axios.post('/auth/sign-up', payload)
+        .then(({ data }) => dispatch(registerRequest(data)))
+        .then(() => {
+            window.location.href = redirectUrl
+        })
+        .catch(error => dispatch(setError(error)))
 }

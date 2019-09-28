@@ -75,13 +75,16 @@ app.post('/auth/sign-up', async (req, res, next) => {
     const { body: user } = req
 
     try {
-        await axios({
+        const { data: { data } } = await axios({
             url: `${config.apiUrl}/api/auth/sign-up`,
             method: 'post',
             data: user,
         })
+
         res.status(201).json({
-            message: 'user created',
+            name: user.name,
+            email: user.email,
+            id: data.id,
         })
     } catch (error) {
         next(error)
