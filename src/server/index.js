@@ -18,4 +18,16 @@ require('css-modules-require-hook')({
     preprocessCss: (data, file) => sass.renderSync({ data, file }).css.toString('utf8'),
 })
 
+// Basic Strategy
+require('./utils/auth/strategies/basic')
+
+// OAuth Strategy
+require('./utils/auth/strategies/oauth')
+
+// Twitter Strategy
+require('./utils/auth/strategies/twitter')
+
+// Facebook Strategy
+require('./utils/auth/strategies/facebook')
+
 require('./server')

@@ -15,7 +15,10 @@
       "before": true,
       "it": true,
       "expect": true,
-      "sinon": true
+      "sinon": true,
+      "node": true,
+      "mocha": true,
+      "es6": true
     },
     "parser": "babel-eslint",
     "plugins": [
@@ -24,6 +27,7 @@
       "import"
     ],
     "rules": {
+      "global-require": 0,
       "react/jsx-fragments": 0,
       "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "never" }],
       "semi": [2, "never"],

@@ -1,10 +1,8 @@
-import dotenv from 'dotenv'
 import { getManifest } from '../utils'
+import { config } from '../config'
 
-dotenv.config()
-
-const { NODE_ENV } = process.env
-const isProd = NODE_ENV === 'production'
+const { nodeEnv } = config
+const isProd = nodeEnv === 'production'
 
 const srcs = {
     mainCss: 'assets/app.css',

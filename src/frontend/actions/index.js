@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 import {
     SET_FAVORITE,
     DELETE_FAVORITE,
@@ -42,3 +44,7 @@ export const filterVideos = payload => ({
     type: FILTER_VIDEOS,
     payload,
 })
+
+export const registerUser = payload => dispatch => {
+    axios.post('')
+}

@@ -1,4 +1,5 @@
-import { createStore, compose } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import reducer from './reducers'
 
 const preloadedState = window.__PRELOADED_STATE__
@@ -11,4 +12,4 @@ if (process.env.NODE_ENV === 'production') {
     enhancer = window.__REDUX_DEVTOOLS_EXTENSION__ || compose
 }
 
-export const store = createStore(reducer, preloadedState, enhancer())
+export const store = createStore(reducer, preloadedState, enhancer(applyMiddleware(thunk)))
