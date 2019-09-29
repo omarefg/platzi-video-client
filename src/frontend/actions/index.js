@@ -48,13 +48,12 @@ export const filterVideos = payload => ({
 
 export const setError = payload => ({
     type: SET_ERROR,
+    payload,
 })
 
 export const registerUser = (payload, redirectUrl) => dispatch => {
     axios.post('/auth/sign-up', payload)
         .then(({ data }) => dispatch(registerRequest(data)))
-        .then(() => {
-            window.location.href = redirectUrl
-        })
+        .then(() => redirectUrl())
         .catch(error => dispatch(setError(error)))
 }
