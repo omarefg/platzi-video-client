@@ -15,4 +15,4 @@ const config = {
     facebookClientSecret: process.env.FACEBOOK_CLIENT_SECRET,
 }
 
-export default { config }
+export default config

@@ -7,7 +7,7 @@ import boom from '@hapi/boom'
 import cookieParser from 'cookie-parser'
 import axios from 'axios'
 import { main } from './routes'
-import { config } from './config'
+import config from './config'
 
 const { nodeEnv, port } = config
 

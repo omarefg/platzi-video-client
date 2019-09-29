@@ -7,10 +7,9 @@ const preloadedState = window.__PRELOADED_STATE__
 let enhancer
 
 if (process.env.NODE_ENV === 'production') {
-    enhancer = compose(applyMiddleware(thunk))
     enhancer = compose
 } else {
-    enhancer = compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__())
+    enhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 }
 
-export const store = createStore(reducer, preloadedState, enhancer)
+export const store = createStore(reducer, preloadedState, enhancer(applyMiddleware(thunk)))

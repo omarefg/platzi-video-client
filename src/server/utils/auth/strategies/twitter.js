@@ -1,10 +1,9 @@
-const passport = require('passport')
-const axios = require('axios')
-const { get } = require('lodash')
-const { Strategy: TwitterStrategy } = require('passport-twitter')
-const boom = require('@hapi/boom')
-
-const { config } = require('../../../config')
+import passport from 'passport'
+import axios from 'axios'
+import { get } from 'lodash'
+import { Strategy as TwitterStrategy } from 'passport-twitter'
+import boom from '@hapi/boom'
+import config from '../../../config'
 
 passport.use(
     new TwitterStrategy({

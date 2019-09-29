@@ -1,9 +1,8 @@
-const passport = require('passport')
-const axios = require('axios')
-const { OAuth2Strategy } = require('passport-oauth')
-const boom = require('@hapi/boom')
-
-const { config } = require('../../../config')
+import passport from 'passport'
+import axios from 'axios'
+import { OAuth2Strategy } from 'passport-oauth'
+import boom from '@hapi/boom'
+import config from '../../../config'
 
 const GOOGLE_AUTHORIZATION_URL = 'https://accounts.google.com/o/oauth2/v2/auth'
 const GOOGLE_TOKEN_URL = 'https://www.googleapis.com/oauth2/v4/token'

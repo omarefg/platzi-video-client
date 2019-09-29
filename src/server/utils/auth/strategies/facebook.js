@@ -1,9 +1,8 @@
-const passport = require('passport')
-const axios = require('axios')
-const boom = require('@hapi/boom')
-const { Strategy: FacebookStrategy } = require('passport-facebook')
-
-const { config } = require('../../../config')
+import passport from 'passport'
+import axios from 'axios'
+import boom from '@hapi/boom'
+import { Strategy as FacebookStrategy } from 'passport-facebook'
+import config from '../../../config'
 
 passport.use(
     new FacebookStrategy(

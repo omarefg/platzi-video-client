@@ -1,8 +1,8 @@
-const passport = require('passport')
-const { BasicStrategy } = require('passport-http')
-const boom = require('@hapi/boom')
-const axios = require('axios')
-const { config } = require('../../../config')
+import passport from 'passport'
+import { BasicStrategy } from 'passport-http'
+import boom from '@hapi/boom'
+import axios from 'axios'
+import config from '../../../config'
 
 passport.use(
     new BasicStrategy(async (email, password, cb) => {
