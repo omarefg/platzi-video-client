@@ -80,6 +80,12 @@ export const loginUser = ({ email, password, rememberMe }, redirectUrl) => dispa
 
 export const postFavoriteMovie = ({ movieId, ...video }) => dispatch => {
     axios.post('/user-movies', { movieId })
-        .then(() => dispatch(setFavorite(video)))
+        .then(({ data: { data: userMovieId } }) => dispatch(setFavorite({ ...video, userMovieId })))
+        .catch(error => setError(error))
+}
+
+export const deleteFavoriteMovie = ({ userMovieId, id }) => dispatch => {
+    axios.delete(`/user-movies/${userMovieId}`)
+        .then(() => dispatch(deleteFavorite(id)))
         .catch(error => setError(error))
 }
