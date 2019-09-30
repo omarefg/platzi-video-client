@@ -20,11 +20,17 @@ const mapDispatchToProps = {
     logoutRequest,
 }
 
-export const Header = connect(mapStateToProps, mapDispatchToProps)(({ user, logoutRequest }) => {
+export const Header = connect(mapStateToProps, mapDispatchToProps)(({ history, user, logoutRequest }) => {
 
     const hasUser = Object.keys(user).length
 
-    const logoutHandler = () => logoutRequest({})
+    const logoutHandler = () => {
+        document.cookie = 'email='
+        document.cookie = 'name='
+        document.cookie = 'id='
+        document.cookie = 'token='
+        logoutRequest({})
+    }
 
     return (
         <header className={styles.header}>
@@ -56,7 +62,7 @@ export const Header = connect(mapStateToProps, mapDispatchToProps)(({ user, logo
                     {hasUser ? (
                         <li>
                             <a
-                                href='#logout'
+                                href='/login'
                                 onClick={logoutHandler}
                             >
                                 Cerrar Sesión

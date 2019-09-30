@@ -7,11 +7,13 @@ import { renderRoutes } from 'react-router-config'
 import { serverRoutes } from '../../frontend/routes'
 import { Layout } from '../../frontend/components'
 import reducer from '../../frontend/reducers'
-import { initialState } from '../../../db/videos.json'
 import { render } from '../render'
+import { setInitialState } from '../utils/initialState'
 
-export const main = (req, res, next) => {
+export const main = async (req, res, next) => {
     try {
+        const initialState = await setInitialState(req)
+        const isLogged = initialState.user.id
         const store = createStore(reducer, initialState)
         const html = renderToString(
             <Provider store={store}>
@@ -20,7 +22,7 @@ export const main = (req, res, next) => {
                     context={{}}
                 >
                     <Layout>
-                        {renderRoutes(serverRoutes)}
+                        {renderRoutes(serverRoutes(isLogged))}
                     </Layout>
                 </StaticRouter>
             </Provider>,

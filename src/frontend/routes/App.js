@@ -1,9 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Home, Login, Register, NotFound, Player } from '../containers'
 import { Layout } from '../components'
 
-export const App = () => {
+const mapStateToProps = state => {
+    return {
+        ...state,
+    }
+}
+
+export const App = connect(mapStateToProps)(({ user }) => {
+    const isLogged = user.id
+
     return (
         <BrowserRouter>
             <Layout>
@@ -11,7 +20,7 @@ export const App = () => {
                     <Route
                         exact
                         path='/'
-                        component={Home}
+                        component={isLogged ? Home : Login}
                     />
                     <Route
                         exact
@@ -26,7 +35,7 @@ export const App = () => {
                     <Route
                         exact
                         path='/player/:id'
-                        component={Player}
+                        component={isLogged ? Player : Login}
                     />
                     <Route
                         component={NotFound}
@@ -35,4 +44,4 @@ export const App = () => {
             </Layout>
         </BrowserRouter>
     )
-}
+})

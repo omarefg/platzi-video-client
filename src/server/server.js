@@ -10,6 +10,8 @@ import { main } from './routes'
 import config from './config'
 
 const { nodeEnv, port } = config
+const THIRTY_DAYS_IN_SEC = 2592000
+const TWO_HOURS_IN_SEC = 7200
 
 const app = express()
 app.use(express.json())
@@ -46,6 +48,8 @@ if (nodeEnv === 'development') {
 app.get('*', main)
 
 app.post('/auth/sign-in', (req, res, next) => {
+    const { rememberMe } = req.body
+    const maxAge = rememberMe ? THIRTY_DAYS_IN_SEC : TWO_HOURS_IN_SEC
     passport.authenticate('basic', (error, data) => {
         try {
             if (error || !data) {
@@ -61,6 +65,7 @@ app.post('/auth/sign-in', (req, res, next) => {
                 res.cookie('token', token, {
                     httpOnly: !config.dev,
                     secure: !config.dev,
+                    maxAge,
                 })
 
                 res.status(200).json(user)

@@ -54,6 +54,26 @@ export const setError = payload => ({
 export const registerUser = (payload, redirectUrl) => dispatch => {
     axios.post('/auth/sign-up', payload)
         .then(({ data }) => dispatch(registerRequest(data)))
-        .then(() => redirectUrl())
+        .then(() => { window.location.href = redirectUrl })
+        .catch(error => dispatch(setError(error)))
+}
+
+export const loginUser = ({ email, password, rememberMe }, redirectUrl) => dispatch => {
+    axios({
+        url: '/auth/sign-in',
+        method: 'post',
+        auth: {
+            username: email,
+            password,
+        },
+        data: { rememberMe },
+    })
+        .then(({ data }) => {
+            document.cookie = `email=${data.email}`
+            document.cookie = `name=${data.name}`
+            document.cookie = `id=${data.id}`
+            dispatch(loginRequest(data))
+        })
+        .then(() => { window.location.href = redirectUrl })
         .catch(error => dispatch(setError(error)))
 }

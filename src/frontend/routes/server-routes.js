@@ -1,9 +1,9 @@
-import { Home, Login, Register, NotFound } from '../containers'
+import { Home, Login, Register, NotFound, Player } from '../containers'
 
-export const serverRoutes = [
+export const serverRoutes = isLogged => ([
     {
         path: '/',
-        component: Home,
+        component: isLogged ? Home : Login,
         exact: true,
     },
     {
@@ -17,8 +17,12 @@ export const serverRoutes = [
         exact: true,
     },
     {
+        path: '/player/:id',
+        exact: true,
+        component: isLogged ? Player : Login,
+    },
+    {
         name: 'NotFound',
         component: NotFound,
     },
-
-]
+])

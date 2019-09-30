@@ -40,7 +40,7 @@ export const Home = connect(mapStateToProps, null)(({ videos }) => {
                                             contentRating={video.contentRating}
                                             duration={video.duration}
                                             showPlay={true}
-                                            showAdd={categorie !== 'Mi Lista'}
+                                            showAdd={categorie !== 'Mi Lista' && !videos['Mi Lista'].find(movie => movie.id === video.id)}
                                             showDelete={categorie === 'Mi Lista'}
                                         />
                                     )

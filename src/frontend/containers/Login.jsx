@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { loginRequest } from '../actions'
+import { loginUser } from '../actions'
 
 import styles from '../assets/styles/containers/Login.module.scss'
 
@@ -9,10 +9,10 @@ import twitter from '../assets/static/icons8-twitter-52.png'
 import google from '../assets/static/icons8-google-50.png'
 
 const mapDispatchToProps = {
-    loginRequest,
+    loginUser,
 }
 
-export const Login = connect(null, mapDispatchToProps)(({ loginRequest, history }) => {
+export const Login = connect(null, mapDispatchToProps)(({ loginUser, history }) => {
     const [form, setForm] = useState({
         email: '',
         password: '',
@@ -24,10 +24,14 @@ export const Login = connect(null, mapDispatchToProps)(({ loginRequest, history 
         [event.target.name]: event.target.value,
     })
 
+    const rememberMeHandler = event => setForm({
+        ...form,
+        [event.target.name]: event.target.checked,
+    })
+
     const submitHandler = event => {
         event.preventDefault()
-        loginRequest(form)
-        history.push('/')
+        loginUser(form, '/')
     }
 
     return (
@@ -46,6 +50,7 @@ export const Login = connect(null, mapDispatchToProps)(({ loginRequest, history 
                         name='email'
                         onChange={setFormHandler}
                         value={form.email}
+                        required
                     />
                     <input
                         className={styles.input}
@@ -55,6 +60,7 @@ export const Login = connect(null, mapDispatchToProps)(({ loginRequest, history 
                         name='password'
                         onChange={setFormHandler}
                         value={form.password}
+                        required
                     />
                     <button
                         type='submit'
@@ -68,8 +74,8 @@ export const Login = connect(null, mapDispatchToProps)(({ loginRequest, history 
                                 id='cbox1'
                                 type='checkbox'
                                 name='rememberMe'
-                                onChange={setFormHandler}
-                                value={form.rememberMe}
+                                onChange={rememberMeHandler}
+                                checked={form.rememberMe}
                             />
                             Recuérdame
                         </label>

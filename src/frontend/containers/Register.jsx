@@ -23,7 +23,7 @@ export const Register = connect(null, mapDispatchToProps)(({ history, registerUs
 
     const submitHandler = event => {
         event.preventDefault()
-        registerUser(form, () => history.push('/login'))
+        registerUser(form, () => '/login')
     }
 
     return (
