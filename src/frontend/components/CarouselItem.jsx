@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-import { setFavorite, deleteFavorite } from '../actions'
+import { postFavoriteMovie, deleteFavorite } from '../actions'
 
 import styles from '../assets/styles/components/Carousel.module.scss'
 import playIcon from '../assets/static/icons8-play-64.png'
@@ -11,7 +11,7 @@ import addIcon from '../assets/static/icons8-plus-64.png'
 import trashIcon from '../assets/static/remove-icon.png'
 
 const mapDispatchToProps = {
-    setFavorite,
+    postFavoriteMovie,
     deleteFavorite,
 }
 
@@ -22,21 +22,23 @@ export const CarouselItem = connect(null, mapDispatchToProps)(props => {
         year,
         contentRating,
         duration,
-        setFavorite,
+        postFavoriteMovie,
         id,
         deleteFavorite,
         showAdd,
         showDelete,
         showPlay,
+        video,
     } = props
 
-    const handleSetFavorite = () => setFavorite({
+    const handleSetFavorite = () => postFavoriteMovie({
         cover,
         title,
         year,
         contentRating,
         duration,
         id,
+        movieId: video._id,
     })
 
     const handleDeleteFavorite = () => deleteFavorite(id)

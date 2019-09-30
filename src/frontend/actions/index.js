@@ -77,3 +77,9 @@ export const loginUser = ({ email, password, rememberMe }, redirectUrl) => dispa
         .then(() => { window.location.href = redirectUrl })
         .catch(error => dispatch(setError(error)))
 }
+
+export const postFavoriteMovie = ({ movieId, ...video }) => dispatch => {
+    axios.post('/user-movies', { movieId })
+        .then(() => dispatch(setFavorite(video)))
+        .catch(error => setError(error))
+}
