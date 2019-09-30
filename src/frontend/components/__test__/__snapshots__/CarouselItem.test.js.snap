@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Carousel Item component Match Snapshot 1`] = `
+<div
+  className="carousel-item"
+>
+  <img
+    className="carousel-item__img"
+  />
+  <div
+    className="carousel-item__details"
+  >
+    <div />
+    <p
+      className="carousel-item__details--title"
+    />
+    <p
+      className="carousel-item__details--subtitle"
+    >
+      undefined undefined undefined minutos
+    </p>
+  </div>
+</div>
+`;

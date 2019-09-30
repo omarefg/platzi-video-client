@@ -78,7 +78,6 @@ export const Header = connect(mapStateToProps, mapDispatchToProps)(({ history, u
 
 Header.propTypes = {
     user: PropTypes.object.isRequired,
-    logoutRequest: PropTypes.func.isRequired,
 }
 
 Header.defaultProps = {

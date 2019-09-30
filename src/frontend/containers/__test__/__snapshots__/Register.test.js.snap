@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Register container Match Snapshot 1`] = `
+<section
+  className="login"
+>
+  <div
+    className="login__container"
+  >
+    <h2>
+      Regístrate
+    </h2>
+    <form
+      className="login__container--form"
+      onSubmit={[Function]}
+    >
+      <input
+        aria-label="Nombre"
+        className="input"
+        name="name"
+        onChange={[Function]}
+        placeholder="Nombre"
+        required={true}
+        type="text"
+      />
+      <input
+        aria-label="Correo"
+        className="input"
+        name="email"
+        onChange={[Function]}
+        placeholder="Correo"
+        required={true}
+        type="email"
+      />
+      <input
+        aria-label="Contraseña"
+        className="input"
+        name="password"
+        onChange={[Function]}
+        placeholder="Contraseña"
+        required={true}
+        type="password"
+      />
+      <button
+        className="button"
+        type="submit"
+      >
+        Regístrate
+      </button>
+    </form>
+    <p
+      className="login__container--register"
+    >
+      Ya tienes cuenta 
+      <a
+        href="/login"
+        onClick={[Function]}
+      >
+        Inicia sesión
+      </a>
+    </p>
+  </div>
+</section>
+`;
